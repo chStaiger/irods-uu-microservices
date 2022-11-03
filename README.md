@@ -17,15 +17,15 @@ iRODS microservices can be installed using the packages provided on the
 
 You can also build the microservices yourself, see [Building from source](#building-from-source).
 
-The microservices are built for iRODS version 4.2.11.
+The microservices are built for iRODS version 4.3.0.
 
 ## Building from source
 To build from source, the following build-time dependencies must be installed:
 
 - `make`
-- `irods-dev-4.2.11`
-- `irods-externals-cmake3.11.4`
-- `irods-externals-clang6.0`
+- `irods-dev-4.3.0`
+- `irods-externals-cmake3.21.4`
+- `irods-externals-clang13.0`
 - `libcurl-openssl-dev`
 - `libjansson-dev`
 - `libarchive-dev`
@@ -33,11 +33,11 @@ To build from source, the following build-time dependencies must be installed:
 
 Ubuntu18:
 ```
-apt-get install g++ irods-dev-4.2.11 irods-externals-cmake3.11.4 irods-externals-clang6.0 make libcurl4-openssl-dev libjansson-dev libarchive-dev
+apt-get install g++ irods-dev-4.3.0 irods-externals-cmake3.21.4 irods-externals-clang13.0 make libcurl4-openssl-dev libjansson-dev libarchive-dev
 ```
 Centos7:
 ```
-sudo yum install gcc-c++ irods-devel-4.2.11-1 irods-externals-cmake3.11.4-0 irods-externals-clang6.0-0 make jansson-devel libarchive-devel libcurl-devel openssl-devel rpmdevtools
+sudo yum install gcc-c++ irods-devel-4.3.0-1 irods-externals-cmake3.21.4-0 irods-externals-clang13.0.0-0 make jansson-devel libarchive-devel libcurl-devel openssl-devel rpmdevtools
 ```
 
 Follow these instructions to build from source:
