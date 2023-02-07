@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 2.8.12)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/CMakeModules")
 
-find_package(IRODS 4.2.8 EXACT REQUIRED)
+find_package(IRODS 4.3.0 EXACT REQUIRED)
 
 message(STATUS "Building for irods-server version ${IRODS_VERSION}")
 
-# Note: Microservices for iRODS >= 4.2 need to be built with the compiler and
+# Note: Microservices for iRODS >= 4.3 need to be built with the compiler and
 # standard libarary provided by iRODS-externals packages.
 # The following packages need to be installed to build the irods microservices:
 #
-# irods-externals-clang-runtime6.0-0
-# irods-externals-clang6.0-0
+# irods-externals-clang-runtime13.0-0
+# irods-externals-clang13.0-0
 
 set(RELEASE_VERSION "0.9.0")
 
@@ -18,7 +18,7 @@ set(CMAKE_CXX_COMPILER ${IRODS_EXTERNALS_FULLPATH_CLANG}/bin/clang++)
 
 project(wur-msis CXX)
 
-add_compile_options(-std=c++14
+add_compile_options(-std=c++17
                     -Os
                     -fPIC
                     -DRODS_SERVER
@@ -41,13 +41,11 @@ set(RUNTIME_LIBS
     ${IRODS_EXTERNALS_FULLPATH_CLANG_RUNTIME}/lib/libc++abi.so.1)
 
 include_directories("${IRODS_EXTERNALS_FULLPATH_CLANG}/include/c++/v1")
+include_directories("${IRODS_EXTERNALS_FULLPATH_BOOST}/include")
+include_directories("${IRODS_EXTERNALS_FULLPATH_JSON}/include")
+include_directories("${IRODS_EXTERNALS_FULLPATH_FMT}/include")
 include_directories("/usr/include/irods")
 
-
-set(BOOST_ROOT "/opt/irods-externals/boost1.67.0-0")
-
-find_package(Boost REQUIRED)
-include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 
 find_package(CURL REQUIRED)
 include_directories(SYSTEM ${CURL_INCLUDE_DIRS})
@@ -121,7 +119,7 @@ set(CPACK_MONOLITHIC_INSTALL 1)
 set(CPACK_CMAKE_GENERATOR "Unix Makefiles")
 
 # Run custom CMake module to detect OS family
-include(${CMAKE_MODULE_PATH}/DetectOS.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/CMakeModules/DetectOS.cmake)
 message(STATUS "Found Linux distro ${DETECTED_OS}")
 
 # Determine which type of package should be generated
